@@ -1,0 +1,10 @@
+#app
+  h1 {{title}}
+  ul.todos
+    li
+      input(v-model='newTodo',@keyup.13='addItem',placeholder='快写下您要我记住的事吧',autofocus='true')
+    li(v-for='(todo,index) in todos',:class='{\"checked\":todo.done}')
+      input(v-model="todo.done",type='checkbox',@change='saveToStore')
+      label {{index+1}}.{{todo.value}}
+      time {{todo.created | date}}
+      button(@click.prevent='delItem(todo)')
