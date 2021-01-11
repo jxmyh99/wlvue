@@ -134,21 +134,14 @@ function submit(obj) {
             },
             (err, resp, _data) => {
                 try {
-                    if (err) {
-                        $.log('\n提交失败')
-                        resolve(false)
-                    } else {
-                        const { code, message } = JSON.parse(_data);
-                        $.log(`\n邀请码提交： ${ obj.shareCode }\n${ $.showLog ? message : '' }`);
-                        if (code == 200) {
-                            $.result.push(`${obj.shareCode}【邀请码】提交成功！`);
-                        } else if (code == 400 && message.indexOf('share code existed') > -1) {
-                            $.result.push(`${obj.shareCode}【邀请码】已经提交过！`);
-                        }
-                        resolve(true)
+                    const { code, message } = JSON.parse(_data);
+                    $.log(`\n邀请码提交： ${ obj.shareCode }\n${ $.showLog ? message : '' }`);
+                    if (code == 200) {
+                        $.result.push(`${obj.shareCode}【邀请码】提交成功！`);
+                    } else if (code == 400 && message.indexOf('share code existed') > -1) {
+                        $.result.push(`${obj.shareCode}【邀请码】已经提交过！`);
                     }
-                    return;
-                    // {"code": 400, "message": "This jxfactory share code existed", "data": null, "powered by": "TNanko", "sponsored by": "tg@EvineD"}
+                    resolve(true)
 
                 } catch (e) {
                     $.logErr(e, resp);
