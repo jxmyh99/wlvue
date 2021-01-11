@@ -46,7 +46,7 @@ const jdPetShareCode = [
         "MTE1NDUwMTI0MDAwMDAwMDQyMzAyODYz"
     ]
     // 赚赚
-const jdZz = 'https://code.chiang.fun/api/v1/jd/jdzz/create/互助码/'
+const jdZZ = 'https://code.chiang.fun/api/v1/jd/jdzz/create/互助码/'
 const jdZZShareCode = [
     "AUX0L1vWZxA",
     "AUWE5mviXyjZdW2esiSoYwQ",
@@ -55,49 +55,71 @@ const jdZZShareCode = [
     "AXHcDyvPPj2Q"
 ]
 
-jdFactoryShareCode.forEach(async(item) => {
-    $.log(`\n京喜工厂`);
-    await submit({
-        url: jdFactoryUrl.replace('互助码', item),
-        shareCode: item
-    })
-})
 
-// ddFactoryShareCode.forEach(async(item) => {
-//     $.log(`\n东东工厂`);
-//     await submit({
-//         url: jdFactoryUrl.replace('互助码', item),
-//         shareCode: item
-//     })
-// })
-// jdBeanShareCode.forEach(async(item) => {
-//     $.log(`\n种豆得豆`);
-//     await submit({
-//         url: jdFactoryUrl.replace('互助码', item),
-//         shareCode: item
-//     })
-// })
-// jdFarmShareCode.forEach(async(item) => {
-//     $.log(`\n东东农场`);
-//     await submit({
-//         url: jdFactoryUrl.replace('互助码', item),
-//         shareCode: item
-//     })
-// })
-// jdPetShareCode.forEach(async(item) => {
-//     $.log(`\n萌宠 `);
-//     await submit({
-//         url: jdFactoryUrl.replace('互助码', item),
-//         shareCode: item
-//     })
-// })
-// jdZZShareCode.forEach(async(item) => {
-//     $.log(`\n赚赚`);
-//     await submit({
-//         url: jdFactoryUrl.replace('互助码', item),
-//         shareCode: item
-//     })
-// })
+
+!(async() => {
+    await $.wait(500);
+    jdFactoryShareCode.forEach(async(item) => {
+        $.log(`\n京喜工厂`);
+        const status = [0];
+        if (status[0] === 0) {
+            status[0] = await submit({
+                url: jdFactoryUrl.replace('互助码', item),
+                shareCode: item
+            })
+        }
+        if (status[0] !== 0) {
+            break;
+        }
+
+    })
+    await $.wait(500);
+    // ddFactoryShareCode.forEach(async(item) => {
+    //     $.log(`\n东东工厂`);
+    //     await submit({
+    //         url: ddFactoryUrl.replace('互助码', item),
+    //         shareCode: item
+    //     })
+    // })
+    await $.wait(500);
+    // jdBeanShareCode.forEach(async(item) => {
+    //     $.log(`\n种豆得豆`);
+    //     await submit({
+    //         url: jdBeanUrl.replace('互助码', item),
+    //         shareCode: item
+    //     })
+    // })
+    await $.wait(500);
+    // jdFarmShareCode.forEach(async(item) => {
+    //     $.log(`\n东东农场`);
+    //     await submit({
+    //         url: jdFarmUrl.replace('互助码', item),
+    //         shareCode: item
+    //     })
+    // })
+    await $.wait(500);
+    // jdPetShareCode.forEach(async(item) => {
+    //     $.log(`\n萌宠 `);
+    //     await submit({
+    //         url: jdPetUrl.replace('互助码', item),
+    //         shareCode: item
+    //     })
+    // })
+    await $.wait(500);
+    // jdZZShareCode.forEach(async(item) => {
+    //     $.log(`\n赚赚`);
+    //     await submit({
+    //         url: jdZZUrl.replace('互助码', item),
+    //         shareCode: item
+    //     })
+    // })
+    await $.wait(500);
+    return false;
+})()
+.catch(e => $.logErr(e))
+    .finally(() => $.done());
+
+
 
 function submit(obj) {
     return new Promise(resolve => {
@@ -107,22 +129,22 @@ function submit(obj) {
             },
             (err, resp, _data) => {
                 try {
-                    if(err){
-                        console.log('\n提交失败')
-                        resolve();
-                    }else{
-                        console.log(_data)
-                        resolve()
+                    if (err) {
+                        $.log('\n提交失败')
+                        resolve(false)
+                    } else {
+                        const { code, message } = JSON.parse(_data);
+                        $.log(`\n邀请码提交：${obj.shareCode}\n${$.showLog ? message : ''}`);
+                        if (code == 200) {
+                            $.result.push('${obj.shareCode}【邀请码】提交成功！');
+                        } else if (code == 400 && message.indexOf('share code existed') > -1) {
+                            $.result.push('${obj.shareCode}【邀请码】已经提交过！');
+                        }
+                        resolve(true)
                     }
                     return;
                     // {"code": 400, "message": "This jxfactory share code existed", "data": null, "powered by": "TNanko", "sponsored by": "tg@EvineD"}
-                    const { code, message } = JSON.parse(_data);
-                    $.log(`\n邀请码提交：${obj.shareCode}\n${$.showLog ? message : ''}`);
-                    if (code == 200) {
-                        $.result.push('${obj.shareCode}【邀请码】提交成功！');
-                    } else if (code == 400 && message.indexOf('share code existed') > -1) {
-                        $.result.push('${obj.shareCode}【邀请码】已经提交过！');
-                    }
+
                 } catch (e) {
                     $.logErr(e, resp);
                 } finally {
