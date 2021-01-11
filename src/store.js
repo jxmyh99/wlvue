@@ -102,7 +102,7 @@ const jdZZShareCode = [
     //     })
     // })
     await $.wait(500);
-    return false;
+    await showMsg();
 })()
 .catch(e => $.logErr(e))
     .finally(() => $.done());
@@ -152,7 +152,13 @@ function submit(obj) {
     });
 }
 
-
+async function showMsg() {
+    if ($.errorMsg) return
+    if ($.isNode()) {
+        await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName}`, `账号${$.index}：${$.nickName || $.UserName}\n昨日收入：${$.incomeBean}京豆 🐶\n昨日支出：${$.expenseBean}京豆 🐶\n当前京豆：${$.beanCount}京豆 🐶${$.message}`, { url: `https://bean.m.jd.com/bean/signIndex.actionbeanDetail/index.action?resourceValue=bean` })
+    }
+    $.msg($.name, '', `账号${$.index}：${$.nickName || $.UserName}\n昨日收入：${$.incomeBean}京豆 🐶\n昨日支出：${$.expenseBean}京豆 🐶\n当前京豆：${$.beanCount}京豆 🐶${$.message}`, { "open-url": "https://bean.m.jd.com/bean/signIndex.actionbeanDetail/index.action?resourceValue=bean" });
+}
 
 
 
