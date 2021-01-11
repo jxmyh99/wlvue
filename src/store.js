@@ -58,10 +58,9 @@ const jdZZShareCode = [
 
 
 !(async() => {
-    await $.wait(500);
-    $.log(`\n京喜工厂`);
+    $.log(`京喜工厂`);
     await bowerTask(jdFactoryUrl, jdFactoryShareCode)
-    $.log(`\n京喜工厂 end`);
+    $.log(`\n京喜工厂结束`);
     await $.wait(500);
     // ddFactoryShareCode.forEach(async(item) => {
     //     $.log(`\n东东工厂`);
@@ -111,11 +110,8 @@ const jdZZShareCode = [
 function bowerTask(url, shareCode) {
     return new Promise(async resolve => {
         for (let i = 0; i < shareCode.length; i++) {
-            $.log(`\
-                n开始第$ { i + 1 }
-                个互助码： $ { shareCode[i] }
-                `);
-            const status = [0];
+            $.log(`\n开始第${ i + 1 }个互助码： ${ shareCode[i] }`);
+            let status = [0];
             if (status[0] === 0) {
                 status[0] = await submit({
                     url: url.replace('互助码', shareCode[i]),
@@ -132,13 +128,9 @@ function bowerTask(url, shareCode) {
 
 function submit(obj) {
     return new Promise(resolve => {
-        $.log(`\
-                n你的互助码: $ { obj.shareCode }
-                `);
+        $.log(`\n你的互助码: ${ obj.shareCode }`);
         $.get({
-                url: `
-                $ { obj.url }
-                `,
+                url: `${ obj.url }`,
             },
             (err, resp, _data) => {
                 try {
@@ -147,14 +139,11 @@ function submit(obj) {
                         resolve(false)
                     } else {
                         const { code, message } = JSON.parse(_data);
-                        $.log(`\
-                n邀请码提交： $ { obj.shareCode }\
-                n$ { $.showLog ? message : '' }
-                `);
+                        $.log(`\n邀请码提交： ${ obj.shareCode }\n${ $.showLog ? message : '' }`);
                         if (code == 200) {
-                            $.result.push('${obj.shareCode}【邀请码】提交成功！');
+                            $.result.push(`${obj.shareCode}【邀请码】提交成功！`);
                         } else if (code == 400 && message.indexOf('share code existed') > -1) {
-                            $.result.push('${obj.shareCode}【邀请码】已经提交过！');
+                            $.result.push(`${obj.shareCode}【邀请码】已经提交过！`);
                         }
                         resolve(true)
                     }
@@ -184,8 +173,7 @@ function Env(t, e) {
         post(t) { return this.send.call(this.env, t, "POST") }
     }
     return new class {
-        constructor(t, e) { this.name = t, this.http = new s(this), this.data = null, this.dataFile = "box.dat", this.logs = [], this.isMute = !1, this.isNeedRewrite = !1, this.logSeparator = "\n", this.startTime = (new Date).getTime(), Object.assign(this, e), this.log("", `\
-                ud83d\ udd14$ { this.name }, \u5f00\ u59cb!`) }
+        constructor(t, e) { this.name = t, this.http = new s(this), this.data = null, this.dataFile = "box.dat", this.logs = [], this.isMute = !1, this.isNeedRewrite = !1, this.logSeparator = "\n", this.startTime = (new Date).getTime(), Object.assign(this, e), this.log("", `\ud83d\udd14${this.name}, \u5f00\u59cb!`) }
         isNode() { return "undefined" != typeof module && !!module.exports }
         isQuanX() { return "undefined" != typeof $task }
         isSurge() { return "undefined" != typeof $httpClient && "undefined" == typeof $loon }
@@ -206,8 +194,7 @@ function Env(t, e) {
                 i = i ? i.replace(/\n/g, "").trim() : i;
                 let r = this.getdata("@chavy_boxjs_userCfgs.httpapi_timeout");
                 r = r ? 1 * r : 20, r = e && e.timeout ? e.timeout : r;
-                const [o, h] = i.split("@"), a = { url: `
-                http: //${h}/v1/scripting/evaluate`, body: { script_text: t, mock_type: "cron", timeout: r }, headers: { "X-Key": o, Accept: "*/*" } };
+                const [o, h] = i.split("@"), a = { url: `http://${h}/v1/scripting/evaluate`, body: { script_text: t, mock_type: "cron", timeout: r }, headers: { "X-Key": o, Accept: "*/*" } };
                 this.post(a, (t, e, i) => s(i))
             }).catch(t => this.logErr(t))
         }
