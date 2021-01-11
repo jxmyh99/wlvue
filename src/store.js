@@ -1,5 +1,5 @@
 [task_local]
- 0 9,12,18 * * * https://raw.githubusercontent.com/whyour/hundun/master/quanx/jx_nc.js, tag=互助码提交, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxnc.png, enabled=true
+ 0 9,12,18 * * * https://raw.githubusercontent.com/jxmyh99/wlvue/master/src/store.js, tag=互助码提交, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxnc.png, enabled=true
 
 const $ = new Env('互助码提交');
 // 京喜工厂
