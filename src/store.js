@@ -63,41 +63,41 @@ jdFactoryShareCode.forEach(async(item) => {
     })
 })
 
-ddFactoryShareCode.forEach(async(item) => {
-    $.log(`\n东东工厂`);
-    await submit({
-        url: jdFactoryUrl.replace('互助码', item),
-        shareCode: item
-    })
-})
-jdBeanShareCode.forEach(async(item) => {
-    $.log(`\n种豆得豆`);
-    await submit({
-        url: jdFactoryUrl.replace('互助码', item),
-        shareCode: item
-    })
-})
-jdFarmShareCode.forEach(async(item) => {
-    $.log(`\n东东农场`);
-    await submit({
-        url: jdFactoryUrl.replace('互助码', item),
-        shareCode: item
-    })
-})
-jdPetShareCode.forEach(async(item) => {
-    $.log(`\n萌宠 `);
-    await submit({
-        url: jdFactoryUrl.replace('互助码', item),
-        shareCode: item
-    })
-})
-jdZZShareCode.forEach(async(item) => {
-    $.log(`\n赚赚`);
-    await submit({
-        url: jdFactoryUrl.replace('互助码', item),
-        shareCode: item
-    })
-})
+// ddFactoryShareCode.forEach(async(item) => {
+//     $.log(`\n东东工厂`);
+//     await submit({
+//         url: jdFactoryUrl.replace('互助码', item),
+//         shareCode: item
+//     })
+// })
+// jdBeanShareCode.forEach(async(item) => {
+//     $.log(`\n种豆得豆`);
+//     await submit({
+//         url: jdFactoryUrl.replace('互助码', item),
+//         shareCode: item
+//     })
+// })
+// jdFarmShareCode.forEach(async(item) => {
+//     $.log(`\n东东农场`);
+//     await submit({
+//         url: jdFactoryUrl.replace('互助码', item),
+//         shareCode: item
+//     })
+// })
+// jdPetShareCode.forEach(async(item) => {
+//     $.log(`\n萌宠 `);
+//     await submit({
+//         url: jdFactoryUrl.replace('互助码', item),
+//         shareCode: item
+//     })
+// })
+// jdZZShareCode.forEach(async(item) => {
+//     $.log(`\n赚赚`);
+//     await submit({
+//         url: jdFactoryUrl.replace('互助码', item),
+//         shareCode: item
+//     })
+// })
 
 function submit(obj) {
     return new Promise(resolve => {
@@ -107,6 +107,14 @@ function submit(obj) {
             },
             (err, resp, _data) => {
                 try {
+                    if(err){
+                        console.log('\n提交失败')
+                        resolve();
+                    }else{
+                        console.log(_data)
+                        resolve()
+                    }
+                    return;
                     // {"code": 400, "message": "This jxfactory share code existed", "data": null, "powered by": "TNanko", "sponsored by": "tg@EvineD"}
                     const { code, message } = JSON.parse(_data);
                     $.log(`\n邀请码提交：${obj.shareCode}\n${$.showLog ? message : ''}`);
