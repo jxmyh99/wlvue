@@ -134,6 +134,11 @@ function submit(obj) {
             },
             (err, resp, _data) => {
                 try {
+                    if(err){
+                        $.log("提交失败",err)
+                        resolve();
+                        return;
+                    }
                     const { code, message } = JSON.parse(_data);
                     $.log(`\n邀请码提交： ${ obj.shareCode }\n${ $.showLog ? message : '' }`);
                     if (code == 200) {
