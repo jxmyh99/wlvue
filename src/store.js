@@ -111,16 +111,10 @@ function bowerTask(url, shareCode) {
     return new Promise(async resolve => {
         for (let i = 0; i < shareCode.length; i++) {
             $.log(`\n开始第${ i + 1 }个互助码： ${ shareCode[i] }`);
-            let status = [0];
-            if (status[0] === 0) {
-                status[0] = await submit({
-                    url: url.replace('互助码', shareCode[i]),
-                    shareCode: shareCode[i]
-                });
-            }
-            if (status[0] !== 0) {
-                break;
-            }
+            await submit({
+                url: url.replace('互助码', shareCode[i]),
+                shareCode: shareCode[i]
+            });
             resolve(true);
         }
     })
@@ -134,8 +128,8 @@ function submit(obj) {
             },
             (err, resp, _data) => {
                 try {
-                    if(err){
-                        $.log("提交失败",err)
+                    if (err) {
+                        $.logErr("提交失败", JSON.stringify(err))
                         resolve();
                         return;
                     }
