@@ -109,7 +109,7 @@ const jdZZShareCode = [
     .finally(() => $.done());
 
 function bowerTask(url, shareCode) {
-    return new Promise(resolve => {
+    return new Promise(async resolve => {
         for (let i = 0; i < shareCode.length; i++) {
             $.log(`\
                 n开始第$ { i + 1 }
