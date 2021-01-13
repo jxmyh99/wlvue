@@ -84,22 +84,17 @@ $.result = [];
 
 function bowerTask(url, shareCode) {
     return new Promise(async resolve => {
-        shareCode.forEach(async item=>{
+        for (let i = 0; i < shareCode.length; i++) {
+            const task = shareCode[i];
             $.log(`\n开始第${ i + 1 }个互助码： ${ shareCode[i] }`);
+            await $.wait(random * 1000);
             await submit({
                 url: url.replace('互助码', shareCode[i]),
                 shareCode: shareCode[i]
             });
-        })
-        // for (let i = 0; i < shareCode.length; i++) {
-        //     $.log(`\n开始第${ i + 1 }个互助码： ${ shareCode[i] }`);
-        //     await $.wait(500);
-        //     await submit({
-        //         url: url.replace('互助码', shareCode[i]),
-        //         shareCode: shareCode[i]
-        //     });
-        //     resolve(true);
-        // }
+            $.log(`\n第${ i + 1 }个互助码： ${ shareCode[i] }提交结束`);
+        }
+        resolve(true);
     })
 }
 
@@ -120,8 +115,10 @@ function submit(obj) {
                     $.log(`\n邀请码提交： ${ obj.shareCode }\n${ $.showLog ? message : '' }`);
                     if (code == 200) {
                         $.result.push(`${obj.shareCode}【邀请码】提交成功！`);
+                        $.log(`${obj.shareCode}【邀请码】提交成功！`)
                     } else if (code == 400 && message.indexOf('share code existed') > -1) {
                         $.result.push(`${obj.shareCode}【邀请码】已经提交过！`);
+                        $.log(`${obj.shareCode}【邀请码】已经提交过！`)
                     }
                     resolve(true)
 
