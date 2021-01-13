@@ -37,7 +37,7 @@ const jdFarmShareCode = [
         "fd4094e16fb94534be44a59d087d0c56",
     ]
     // 萌宠 
-const jdPet = 'http://api.turinglabs.net/api/v1/jd/pet/create/互助码/'
+const jdPetUrl = 'http://api.turinglabs.net/api/v1/jd/pet/create/互助码/'
 const jdPetShareCode = [
         "MTE1NDUwMTI0MDAwMDAwMDM2NjA5NTYx",
         "TE1NDUyMjEwMDAwMDAwNDAyMzU1MDc=",
@@ -46,7 +46,7 @@ const jdPetShareCode = [
         "MTE1NDUwMTI0MDAwMDAwMDQyMzAyODYz"
     ]
     // 赚赚
-const jdZZ = 'https://code.chiang.fun/api/v1/jd/jdzz/create/互助码/'
+const jdZZUrl = 'https://code.chiang.fun/api/v1/jd/jdzz/create/互助码/'
 const jdZZShareCode = [
     "AUX0L1vWZxA",
     "AUWE5mviXyjZdW2esiSoYwQ",
@@ -71,7 +71,7 @@ const jdZZShareCode = [
     $.log(`\n东东农场结束`);
     await $.wait(500);
     $.log(`\n萌宠`);
-    bowerTask(jdPet, jdPetShareCode)
+    bowerTask(jdPetUrl, jdPetShareCode)
     $.log(`\n萌宠结束`)
     await $.wait(500);
     $.log(`\n赚赚`);
