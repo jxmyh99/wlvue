@@ -54,7 +54,7 @@ const jdZZShareCode = [
     "AUWE569nUiF1pSQeJjCoO",
     "AXHcDyvPPj2Q"
 ]
-
+$.result = [];
 
 
 !(async() => {
@@ -111,9 +111,9 @@ function submit(obj) {
                     const { code, message } = JSON.parse(_data);
                     $.log(`\n邀请码提交： ${ obj.shareCode }\n${ $.showLog ? message : '' }`);
                     if (code == 200) {
-                        $.log(`${obj.shareCode}【邀请码】提交成功！`);
+                        $.result.push(`${obj.shareCode}【邀请码】提交成功！`);
                     } else if (code == 400 && message.indexOf('share code existed') > -1) {
-                        $.log(`${obj.shareCode}【邀请码】已经提交过！`);
+                        $.result.push(`${obj.shareCode}【邀请码】已经提交过！`);
                     }
                     resolve(true)
 
@@ -132,7 +132,7 @@ async function showMsg() {
     if ($.isNode()) {
         await notify.sendNotify(`${$.name} - 账号${$.index} - ${$.nickName}`, `账号${$.index}：${$.nickName || $.UserName}\n昨日收入：${$.incomeBean}京豆 🐶\n昨日支出：${$.expenseBean}京豆 🐶\n当前京豆：${$.beanCount}京豆 🐶${$.message}`, { url: `https://bean.m.jd.com/bean/signIndex.actionbeanDetail/index.action?resourceValue=bean` })
     }
-    $.msg($.name, '', `账号${$.index}：${$.nickName || $.UserName}\n昨日收入：${$.incomeBean}京豆 🐶\n昨日支出：${$.expenseBean}京豆 🐶\n当前京豆：${$.beanCount}京豆 🐶${$.message}`, { "open-url": "https://bean.m.jd.com/bean/signIndex.actionbeanDetail/index.action?resourceValue=bean" });
+    $.msg($.name, '', `${$.result.join("\n")}`, { "open-url": "https://bean.m.jd.com/bean/signIndex.actionbeanDetail/index.action?resourceValue=bean" });
 }
 
 
