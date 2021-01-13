@@ -111,9 +111,9 @@ function submit(obj) {
                     const { code, message } = JSON.parse(_data);
                     $.log(`\n邀请码提交： ${ obj.shareCode }\n${ $.showLog ? message : '' }`);
                     if (code == 200) {
-                        $.result.push(`${obj.shareCode}【邀请码】提交成功！`);
+                        $.log(`${obj.shareCode}【邀请码】提交成功！`);
                     } else if (code == 400 && message.indexOf('share code existed') > -1) {
-                        $.result.push(`${obj.shareCode}【邀请码】已经提交过！`);
+                        $.log(`${obj.shareCode}【邀请码】已经提交过！`);
                     }
                     resolve(true)
 
