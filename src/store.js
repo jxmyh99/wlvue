@@ -5,7 +5,8 @@
 const $ = new Env('互助码提交');
 // 京喜工厂
 const jdFactoryUrl = 'http://api.turinglabs.net/api/v1/jd/jxfactory/create/互助码/'
-const jdFactoryShareCode = ["8JyxKgsHRRB1j7GBkLOoJQ==",
+const jdFactoryShareCode = [
+    "8JyxKgsHRRB1j7GBkLOoJQ==",
     "AbB6wjBQfPYYgF6DbE28RA==",
     "tIWJQpzcZATpSeNiICwlzg==",
     "29keVivQnYUdyPK8jA8TZw==",
@@ -13,7 +14,8 @@ const jdFactoryShareCode = ["8JyxKgsHRRB1j7GBkLOoJQ==",
 ];
 // 东东工厂
 const ddFactoryUrl = 'http://api.turinglabs.net/api/v1/jd/ddfactory/create/互助码/'
-const ddFactoryShareCode = ["P04z54XCjVWnYaS5m9AVSmg1HU",
+const ddFactoryShareCode = [
+        "P04z54XCjVWnYaS5m9AVSmg1HU",
         "P04z54XCjVWnYaS5m9cZ2Wt2ntJwNMU7QLwKkM",
         "P04z54XCjVWnYaS5mZQWT6vlyRLlYri",
         "P04z54XCjVWnYaS5m9cZxSMmTki9KO6PDItWQ",
@@ -21,7 +23,8 @@ const ddFactoryShareCode = ["P04z54XCjVWnYaS5m9AVSmg1HU",
     ]
     // 种豆
 const jdBeanUrl = 'http://api.turinglabs.net/api/v1/jd/bean/create/互助码/'
-const jdBeanShareCode = ["ep4bsdx3ajfgurgprhz6mvimg4",
+const jdBeanShareCode = [
+        "ep4bsdx3ajfgurgprhz6mvimg4",
         "mlrdw3aw26j3wamoevyeorygfqzipvemzl6gmfy",
         "mzwyl2w2yxawjlkiowimkr76bi",
         "ebxm5lgxoknqd54utd25cbleekis3qopwfs3qda",
@@ -59,23 +62,34 @@ $.result = [];
 
 !(async() => {
     $.log(`\n京喜工厂`);
+    $.result.push(`\n京喜工厂`);
     await bowerTask(jdFactoryUrl, jdFactoryShareCode)
+    $.result.push(`\n京喜工厂结束`);
     $.log(`\n京喜工厂结束`);
     await $.wait(500);
     $.log(`\n种豆得豆`);
+    $.result.push(`\n种豆得豆`);
+
     await bowerTask(jdBeanUrl, jdBeanShareCode)
+    $.result.push(`\n种豆得豆结束`);
     $.log(`\n种豆得豆结束`);
     await $.wait(500);
     $.log(`\n东东农场`);
+    $.result.push(`\n东东农场`);
     await bowerTask(jdFarmUrl, jdFarmShareCode)
+    $.result.push(`\n东东农场结束`);
     $.log(`\n东东农场结束`);
     await $.wait(500);
     $.log(`\n萌宠`);
+    $.result.push(`\n萌宠`);
     await bowerTask(jdPetUrl, jdPetShareCode)
+    $.result.push(`\n萌宠结束`)
     $.log(`\n萌宠结束`)
     await $.wait(500);
     $.log(`\n赚赚`);
+    $.result.(`\n赚赚`);
     await bowerTask(jdZZUrl, jdZZShareCode)
+    $.result.(`\n赚赚结束`)
     $.log(`\n赚赚结束`)
     await showMsg();
 })()
@@ -86,12 +100,12 @@ function bowerTask(url, shareCode) {
     return new Promise(async resolve => {
         for (let i = 0; i < shareCode.length; i++) {
             const task = shareCode[i];
-            $.log(`\n开始第${ i + 1 }个互助码： ${ shareCode[i] }`);
+            $.log(`\n开始第${ i + 1 }个互助码`);
             await submit({
                 url: url.replace('互助码', shareCode[i]),
                 shareCode: shareCode[i]
             });
-            $.log(`\n第${ i + 1 }个互助码： ${ shareCode[i] }提交结束`);
+            $.log(`\n第${ i + 1 }个互助码  提交结束`);
         }
         resolve(true);
     })
@@ -123,7 +137,7 @@ function submit(obj) {
                     const { code, message } = JSON.parse(_data);
                     timer = null;
                     clearTimeout(timer);
-                    $.log(`\n邀请码提交： ${ obj.shareCode }\n${ $.showLog ? message : '' }`);
+                    // $.log(`\n邀请码提交： ${ obj.shareCode }\n${ $.showLog ? message : '' }`);
                     if (code == 200) {
                         $.result.push(`${obj.shareCode}【邀请码】提交成功！`);
                         $.log(`${obj.shareCode}【邀请码】提交成功！`)
