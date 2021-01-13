@@ -101,7 +101,10 @@ function submit(obj) {
     return new Promise(resolve => {
         $.log(`\n你的互助码: ${ obj.shareCode }`);
         let timer = setTimeout(res => {
-            $.log(`${obj.shareCode}【邀请码】提交超时！`)
+            $.result.push(`${obj.shareCode}【邀请码】提交超时！`);
+            $.logErr(`${obj.shareCode}【邀请码】提交超时！`)
+            timer = null;
+            clearTimeout(timer);
             resolve(true)
         }, 5000)
         $.get({
@@ -126,7 +129,7 @@ function submit(obj) {
                         $.log(`${obj.shareCode}【邀请码】提交成功！`)
                     } else if (code == 400 && message.indexOf('share code existed') > -1) {
                         $.result.push(`${obj.shareCode}【邀请码】已经提交过！`);
-                        $.log(`${obj.shareCode}【邀请码】已经提交过！`)
+                        $.logErr(`${obj.shareCode}【邀请码】已经提交过！`)
                     }
                     resolve(true)
 
