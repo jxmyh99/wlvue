@@ -58,50 +58,25 @@ const jdZZShareCode = [
 
 
 !(async() => {
-    $.log(`京喜工厂`);
-    await bowerTask(jdFactoryUrl, jdFactoryShareCode)
+    $.log(`\n京喜工厂`);
+    bowerTask(jdFactoryUrl, jdFactoryShareCode)
     $.log(`\n京喜工厂结束`);
     await $.wait(500);
-    // ddFactoryShareCode.forEach(async(item) => {
-    //     $.log(`\n东东工厂`);
-    //     await submit({
-    //         url: ddFactoryUrl.replace('互助码', item),
-    //         shareCode: item
-    //     })
-    // })
+    $.log(`\n种豆得豆`);
+    bowerTask(jdBeanUrl, jdBeanShareCode)
+    $.log(`\n种豆得豆结束`);
     await $.wait(500);
-    // jdBeanShareCode.forEach(async(item) => {
-    //     $.log(`\n种豆得豆`);
-    //     await submit({
-    //         url: jdBeanUrl.replace('互助码', item),
-    //         shareCode: item
-    //     })
-    // })
+    $.log(`\n东东农场`);
+    bowerTask(jdFarmUrl, jdFarmShareCode)
+    $.log(`\n东东农场结束`);
     await $.wait(500);
-    // jdFarmShareCode.forEach(async(item) => {
-    //     $.log(`\n东东农场`);
-    //     await submit({
-    //         url: jdFarmUrl.replace('互助码', item),
-    //         shareCode: item
-    //     })
-    // })
+    $.log(`\n萌宠`);
+    bowerTask(jdPetUrl, jdPetShareCode)
+    $.log(`\n萌宠结束`)
     await $.wait(500);
-    // jdPetShareCode.forEach(async(item) => {
-    //     $.log(`\n萌宠 `);
-    //     await submit({
-    //         url: jdPetUrl.replace('互助码', item),
-    //         shareCode: item
-    //     })
-    // })
-    await $.wait(500);
-    // jdZZShareCode.forEach(async(item) => {
-    //     $.log(`\n赚赚`);
-    //     await submit({
-    //         url: jdZZUrl.replace('互助码', item),
-    //         shareCode: item
-    //     })
-    // })
-    await $.wait(500);
+    $.log(`\n赚赚`);
+    bowerTask(jdZZUrl, jdZZShareCode)
+    $.log(`\n赚赚结束`)
     await showMsg();
 })()
 .catch(e => $.logErr(e))
