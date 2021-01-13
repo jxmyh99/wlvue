@@ -59,23 +59,23 @@ $.result = [];
 
 !(async() => {
     $.log(`\n京喜工厂`);
-    bowerTask(jdFactoryUrl, jdFactoryShareCode)
+    await bowerTask(jdFactoryUrl, jdFactoryShareCode)
     $.log(`\n京喜工厂结束`);
     await $.wait(500);
     $.log(`\n种豆得豆`);
-    bowerTask(jdBeanUrl, jdBeanShareCode)
+    await bowerTask(jdBeanUrl, jdBeanShareCode)
     $.log(`\n种豆得豆结束`);
     await $.wait(500);
     $.log(`\n东东农场`);
-    bowerTask(jdFarmUrl, jdFarmShareCode)
+    await bowerTask(jdFarmUrl, jdFarmShareCode)
     $.log(`\n东东农场结束`);
     await $.wait(500);
     $.log(`\n萌宠`);
-    bowerTask(jdPetUrl, jdPetShareCode)
+    await bowerTask(jdPetUrl, jdPetShareCode)
     $.log(`\n萌宠结束`)
     await $.wait(500);
     $.log(`\n赚赚`);
-    bowerTask(jdZZUrl, jdZZShareCode)
+    await bowerTask(jdZZUrl, jdZZShareCode)
     $.log(`\n赚赚结束`)
     await showMsg();
 })()
@@ -86,6 +86,7 @@ function bowerTask(url, shareCode) {
     return new Promise(async resolve => {
         for (let i = 0; i < shareCode.length; i++) {
             $.log(`\n开始第${ i + 1 }个互助码： ${ shareCode[i] }`);
+            await $.wait(500);
             await submit({
                 url: url.replace('互助码', shareCode[i]),
                 shareCode: shareCode[i]
