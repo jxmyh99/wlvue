@@ -101,6 +101,10 @@ function bowerTask(url, shareCode) {
 function submit(obj) {
     return new Promise(resolve => {
         $.log(`\n你的互助码: ${ obj.shareCode }`);
+        setTimeout(res => {
+            $.log(`${obj.shareCode}【邀请码】提交超时！`)
+            resolve(true)
+        }, 5000)
         $.get({
                 url: `${ obj.url }`,
             },
