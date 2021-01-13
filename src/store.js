@@ -84,15 +84,22 @@ $.result = [];
 
 function bowerTask(url, shareCode) {
     return new Promise(async resolve => {
-        for (let i = 0; i < shareCode.length; i++) {
+        shareCode.forEach(async item=>{
             $.log(`\n开始第${ i + 1 }个互助码： ${ shareCode[i] }`);
-            await $.wait(500);
             await submit({
                 url: url.replace('互助码', shareCode[i]),
                 shareCode: shareCode[i]
             });
-            resolve(true);
-        }
+        })
+        // for (let i = 0; i < shareCode.length; i++) {
+        //     $.log(`\n开始第${ i + 1 }个互助码： ${ shareCode[i] }`);
+        //     await $.wait(500);
+        //     await submit({
+        //         url: url.replace('互助码', shareCode[i]),
+        //         shareCode: shareCode[i]
+        //     });
+        //     resolve(true);
+        // }
     })
 }
 
