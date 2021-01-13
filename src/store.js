@@ -87,7 +87,6 @@ function bowerTask(url, shareCode) {
         for (let i = 0; i < shareCode.length; i++) {
             const task = shareCode[i];
             $.log(`\n开始第${ i + 1 }个互助码： ${ shareCode[i] }`);
-            await $.wait(random * 1000);
             await submit({
                 url: url.replace('互助码', shareCode[i]),
                 shareCode: shareCode[i]
