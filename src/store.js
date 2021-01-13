@@ -87,9 +87,9 @@ $.result = [];
     $.log(`\n萌宠结束`)
     await $.wait(500);
     $.log(`\n赚赚`);
-    $.result.(`\n赚赚`);
+    $.result.push(`\n赚赚`);
     await bowerTask(jdZZUrl, jdZZShareCode)
-    $.result.(`\n赚赚结束`)
+    $.result.push(`\n赚赚结束`)
     $.log(`\n赚赚结束`)
     await showMsg();
 })()
