@@ -71,7 +71,7 @@ const jdZZShareCode = [
     $.log(`\n东东农场结束`);
     await $.wait(500);
     $.log(`\n萌宠`);
-    bowerTask(jdPetUrl, jdPetShareCode)
+    bowerTask(jdPet, jdPetShareCode)
     $.log(`\n萌宠结束`)
     await $.wait(500);
     $.log(`\n赚赚`);
