@@ -11,6 +11,9 @@ const jdFactoryShareCode = [
     "tIWJQpzcZATpSeNiICwlzg==",
     "29keVivQnYUdyPK8jA8TZw==",
     "DT3bL110KSi9NGRHFdOe2Q==",
+    "5InlHCOpavz0B72RXtcJ2Q==",
+    "zoP4S11JA583B1-va6g3bg==",
+    "DLbigFE6hfHOxrxTOxdROQ==",
 ];
 // 东东工厂
 const ddFactoryUrl = 'http://api.turinglabs.net/api/v1/jd/ddfactory/create/互助码/'
@@ -19,7 +22,11 @@ const ddFactoryShareCode = [
         "P04z54XCjVWnYaS5m9cZ2Wt2ntJwNMU7QLwKkM",
         "P04z54XCjVWnYaS5mZQWT6vlyRLlYri",
         "P04z54XCjVWnYaS5m9cZxSMmTki9KO6PDItWQ",
-        "P04z54XCjVWnYaS5mJKXTWmgj4b"
+        "P04z54XCjVWnYaS5mJKXTWmgj4b",
+        "T015a3nXlaiFIOJLU0kCjVWnYaS5kRrbA",
+        "T018v_h6RhYc8VXeKRub1ACjVWnYaS5kRrbA",
+        "T0159K4gQRcQ9FXWIhkCjVWnYaS5kRrbA",
+        "T0225KkcRx9Pp1LUckzzk6IMfQCjVWnYaS5kRrbA",
     ]
     // 种豆
 const jdBeanUrl = 'http://api.turinglabs.net/api/v1/jd/bean/create/互助码/'
@@ -28,7 +35,12 @@ const jdBeanShareCode = [
         "mlrdw3aw26j3wamoevyeorygfqzipvemzl6gmfy",
         "mzwyl2w2yxawjlkiowimkr76bi",
         "ebxm5lgxoknqd54utd25cbleekis3qopwfs3qda",
-        "mqidctphdbwsfjtcdsa3xwgcdu"
+        "mqidctphdbwsfjtcdsa3xwgcdu",
+        "upuv63aorx3ppsjgtteffn6g4u",
+        "dcabav3er4s6se3dm5wl5ffvbu3h7wlwy7o5jii",
+        "q3rtq2bjieodyoqcuksu3wql2a",
+        "4npkonnsy7xi2rdd24t2sv7u75i3sfule66e6ia
+        "c7c96367d8c8465bb8a4b15b786189e1"
     ]
     // 东东农场 
 const jdFarmUrl = 'http://api.turinglabs.net/api/v1/jd/farm/create/互助码/'
@@ -38,6 +50,10 @@ const jdFarmShareCode = [
         "9ece5723733d402cae7d729b1a6b5d82",
         "1c0b6bf54a0c4f4d98bc9157e1a09e5c",
         "fd4094e16fb94534be44a59d087d0c56",
+        "fd7ed8f1c3c24b61b6a14e6822975ce0",
+        "b8fb73f07d2c45728d3b1c3d9f25aa2c",
+        "d5efca1bd5a940aead7bdf395bcfc479",
+        "c7c96367d8c8465bb8a4b15b786189e1"
     ]
     // 萌宠 
 const jdPetUrl = 'http://api.turinglabs.net/api/v1/jd/pet/create/互助码/'
@@ -46,7 +62,10 @@ const jdPetShareCode = [
         "TE1NDUyMjEwMDAwMDAwNDAyMzU1MDc=",
         "MTE1NDQ5MzYwMDAwMDAwMzY5ODgzNDM=",
         "MTE1NDAxNzcwMDAwMDAwMzY5NjkzNjM=",
-        "MTE1NDUwMTI0MDAwMDAwMDQyMzAyODYz"
+        "MTE1NDUwMTI0MDAwMDAwMDQyMzAyODYz",
+        "MTEzMzI0OTE0NTAwMDAwMDA0MzMxNTg0OQ==",
+        "MTE1NDQ5MzYwMDAwMDAwNDMzMTU5MDc=",
+        "MTE1NDAxNzcwMDAwMDAwMzYzOTY2MzE=",
     ]
     // 赚赚
 const jdZZUrl = 'https://code.chiang.fun/api/v1/jd/jdzz/create/互助码/'
@@ -55,7 +74,12 @@ const jdZZShareCode = [
     "AUWE5mviXyjZdW2esiSoYwQ",
     "AWG0HwfralTQIDWU",
     "AUWE569nUiF1pSQeJjCoO",
-    "AXHcDyvPPj2Q"
+    "AXHcDyvPPj2Q",
+    "S5KkcNGpdsDy2YX2FxaFO",
+    "Sa3nXlaiFIOJLU0k",
+    "Sv_h6RhYc8VXeKRub1A",
+    "S9K4gQRcQ9FXWIhk",
+    "S5KkcRx9Pp1LUckzzk6IMfQ",
 ]
 $.result = [];
 
@@ -129,6 +153,7 @@ function submit(obj) {
 
                     if (err) {
                         $.logErr("提交失败", JSON.stringify(err))
+                        $.result.push(`${obj.shareCode}【邀请码】${JSON.stringify(err)}！`);
                         timer = null;
                         clearTimeout(timer);
                         resolve();
@@ -151,6 +176,7 @@ function submit(obj) {
                     timer = null;
                     clearTimeout(timer);
                     $.logErr(e, resp);
+                    $.result.push(`${obj.shareCode}【邀请码】提交${e}`);
                 } finally {
                     timer = null;
                     clearTimeout(timer);
