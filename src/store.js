@@ -39,7 +39,7 @@ const jdBeanShareCode = [
         "upuv63aorx3ppsjgtteffn6g4u",
         "dcabav3er4s6se3dm5wl5ffvbu3h7wlwy7o5jii",
         "q3rtq2bjieodyoqcuksu3wql2a",
-        "4npkonnsy7xi2rdd24t2sv7u75i3sfule66e6ia
+        "4npkonnsy7xi2rdd24t2sv7u75i3sfule66e6ia",
         "c7c96367d8c8465bb8a4b15b786189e1"
     ]
     // 东东农场 
