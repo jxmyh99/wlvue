@@ -100,7 +100,7 @@ function bowerTask(url, shareCode) {
 function submit(obj) {
     return new Promise(resolve => {
         $.log(`\n你的互助码: ${ obj.shareCode }`);
-        setTimeout(res => {
+        let timer = setTimeout(res => {
             $.log(`${obj.shareCode}【邀请码】提交超时！`)
             resolve(true)
         }, 5000)
@@ -109,12 +109,17 @@ function submit(obj) {
             },
             (err, resp, _data) => {
                 try {
+
                     if (err) {
                         $.logErr("提交失败", JSON.stringify(err))
+                        timer = null;
+                        clearTimeout(timer);
                         resolve();
                         return;
                     }
                     const { code, message } = JSON.parse(_data);
+                    timer = null;
+                    clearTimeout(timer);
                     $.log(`\n邀请码提交： ${ obj.shareCode }\n${ $.showLog ? message : '' }`);
                     if (code == 200) {
                         $.result.push(`${obj.shareCode}【邀请码】提交成功！`);
@@ -126,8 +131,12 @@ function submit(obj) {
                     resolve(true)
 
                 } catch (e) {
+                    timer = null;
+                    clearTimeout(timer);
                     $.logErr(e, resp);
                 } finally {
+                    timer = null;
+                    clearTimeout(timer);
                     resolve();
                 }
             },
